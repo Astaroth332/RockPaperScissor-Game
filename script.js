@@ -1,3 +1,61 @@
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorButton = document.querySelector('#scissor');
+const result = document.querySelector('#result');
+const userScore = document.querySelector('#user-score');
+const computerScore = document.querySelector('#computer-score');
+const roundResult = document.querySelector('#round-result');
+
+
+    let userNumberOfWins = 0;
+    let userNumberOfLoss = 0;
+
+rockButton.addEventListener('click', () => {
+    let upperCasePlayerChoice = rockButton.id.toUpperCase();
+
+    let computerChoice = getComputerChoice();
+    let upperCaseComputerChoice = computerChoice.toUpperCase();
+
+    let roundResult = playRound(upperCasePlayerChoice, upperCaseComputerChoice);
+
+    getScore(roundResult);
+
+    matchResult(userNumberOfWins, userNumberOfLoss);
+
+   
+    
+});
+
+
+paperButton.addEventListener('click', () => {
+    let upperCasePlayerChoice = paperButton.id.toUpperCase();
+
+    let computerChoice = getComputerChoice();
+    let upperCaseComputerChoice = computerChoice.toUpperCase();
+
+    let roundResult = playRound(upperCasePlayerChoice, upperCaseComputerChoice);
+
+    getScore(roundResult);
+
+    matchResult(userNumberOfWins, userNumberOfLoss);
+
+   
+});
+
+scissorButton.addEventListener('click', () => {
+    let upperCasePlayerChoice = scissorButton.id.toUpperCase();
+
+    let computerChoice = getComputerChoice();
+    let upperCaseComputerChoice = computerChoice.toUpperCase();
+
+    let roundResult = playRound(upperCasePlayerChoice, upperCaseComputerChoice);
+
+    getScore(roundResult);
+
+    matchResult(userNumberOfWins, userNumberOfLoss);
+
+});
+
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     if (randomNumber === 1) {
@@ -16,68 +74,52 @@ function playRound(upperCasePlayerChoice, upperCaseComputerChoice) {
     }
 
     if (upperCasePlayerChoice === "ROCK" && upperCaseComputerChoice === "PAPER") {
-        return "You lose! Paper beats rock";
+        return "You lose the round! Paper beats rock";
     }   else if (upperCasePlayerChoice === "ROCK" && upperCaseComputerChoice === "SCISSOR") {
-        return "You win! Rock beats Scissor";
+        return "You win the round! Rock beats Scissor";
     }   else if (upperCasePlayerChoice === "PAPER" && upperCaseComputerChoice === "ROCK") {
-        return "You win! Paper beats Rock";
+        return "You win the round! Paper beats Rock";
     }   else if (upperCasePlayerChoice === "PAPER" && upperCaseComputerChoice === "SCISSOR") {
-        return "You lose! Scissor beats paper"
+        return "You lose the round! Scissor beats paper";
     }   else if (upperCasePlayerChoice === "SCISSOR" && upperCaseComputerChoice === "ROCK") {
-        return "You lose! Rock beats Scissor";
+        return "You lose the round! Rock beats Scissor";
     }   else if (upperCasePlayerChoice === "SCISSOR" && upperCaseComputerChoice === "PAPER") {
-        return "You win! Scissor beats Paper";
+        return "You win the round! Scissor beats Paper";
     }   else {
-        return "DRAW";
+        return  "DRAW";
     }
 
 }
 
+function disableButton() {
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorButton.disabled = true;
+}
 
-function game() {
-
-    let userNumberOfWins = 0;
-    let userNumberOfLoss = 0;
-    let computerNumberOfWins = 0;
-    let computerNumberOfLoss = 0;
-
-while (true) {
-    
-let playerChoice = prompt("What's your bet? Rock, Paper or Scissor");
-let upperCasePlayerChoice = playerChoice.toUpperCase();
-
-let computerChoice = getComputerChoice();
-let upperCaseComputerChoice = computerChoice.toUpperCase();
-
-let result = playRound(upperCasePlayerChoice, upperCaseComputerChoice); 
-
-console.log(result)
-
-    if (result.includes("win!")) {
-        userNumberOfWins++; 
-        computerNumberOfLoss++;  
-    }   else if (result.includes("lose!")) {
+function getScore(round) {
+    if (round.includes('win')) {
+        userNumberOfWins++;
+        userScore.textContent = userNumberOfWins.toString();
+        result.textContent = round;
+    } else if (round.includes('lose')) {
         userNumberOfLoss++;
-        computerNumberOfWins++;
-    }  
-    
-
-    if (userNumberOfWins === 5) {
-        console.log(`You are the winner of the game which has ${userNumberOfWins} points`);
-        console.log(`Your lose points is ${userNumberOfLoss}`);
-        break;
-    }   else if (userNumberOfLoss === 5) {
-        console.log(`You are the loser of the game which has ${userNumberOfLoss} points`);
-        console.log(`Your win points is ${userNumberOfWins}`);
-        break;
+        computerScore.textContent = userNumberOfLoss.toString();
+        result.textContent = round;
     }
-
 }
 
+function matchResult(winPoints, losePoints) {
+    if (winPoints === 5) {
+        result.textContent = "You win the match!";
+        disableButton()
+    } else if (losePoints === 5) {
+        result.textContent = "You lose the match!";
+        disableButton()
+    }
 }
 
 
-game()
 
      
     

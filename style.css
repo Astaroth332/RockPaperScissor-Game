@@ -1,0 +1,53 @@
+* {
+    color: white;
+}
+
+body {
+    background-color: #13262F;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    padding-top: 140px
+}
+
+button {
+    background-color: #13262F;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+
+#result {
+    height: 70px;
+    text-align: center;
+    font-size: 65px;
+    padding-top: 30px;
+    font-family: 'Alfa Slab One', serif;
+    color: limegreen;
+    text-shadow: 2px 2px yellow;
+}
+
+.match {
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#user, #computer {
+    font-size: 35px;
+    font-family: 'Alfa Slab One', serif;
+    color: limegreen;
+    text-shadow: 2px 2px yellow;
+ 
+}
+
+#computer-score, #user-score {
+    padding-top: 25px;
+    text-align: center;
+    text-shadow: none;
+
+} 
